@@ -57,18 +57,19 @@ const getRandomCharacter = async () => {
     return data2;
 }
 
-// const getRandomCharacterInfo = async () => {
-//     const resp = await fetch('https://rickandmortyapi.com/api/character');
-//     const data = await resp.json();
-//     console.log(data);
-//     const random = Math.floor(Math.random() * data.info.count);
-//     const resp2 = await fetch(`https://rickandmortyapi.com/api/character/${random}/`);
-//     const data2 = await resp2.json();
-//     console.log(data2);
-//     const name = data2.name;
-//     const img = data2.image;
-//     const episode = data2.image;
-//     const resp3 = await fetch('https://rickandmortyapi.com/api/episode');
-//     const data3 = await resp3.json();
-//     console.log(data3);
-// }
+const getRandomCharacterInfo = async () => {
+    const resp = await fetch('https://rickandmortyapi.com/api/character');
+    const data = await resp.json();
+    const random = Math.floor(Math.random() * data.info.count + 1);
+    const resp2 = await fetch(`https://rickandmortyapi.com/api/character/${random}/`);
+    const data2 = await resp2.json();
+    const name = data2.name;
+    const img = data2.image;
+    const episodes = data2.episode;
+    const firstEpisode = episodes[0];
+    const resp3 = await fetch(episodes[0]);
+    const data3 = await resp3.json();
+    console.log(data3);
+    const dateEpisode = data3.air_date;
+    return {img, name, episodes, firstEpisode, dateEpisode}
+}
